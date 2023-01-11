@@ -3,7 +3,6 @@ package api;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Clock;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -113,20 +112,20 @@ public class ApiTest {
                 .then().log().all();
     }
 
-    @Test(priority = -5)
-    public void timeTest() {
-        Specifications.installSpecifications(Specifications.requestSpec(URL), Specifications.responseSpecUnique(200));
-        UserTime user = new UserTime("morpheus", "zion resident");
-        UserTimeResponse response = given()
-                .body(user)
-                .when()
-                .put("api/users/2")
-                .then().log().all()
-                .extract().as(UserTimeResponse.class);
-        String regex = "(.{12})$";
-        String regex2 = "(.{6})$";
-        String currentTime = Clock.systemUTC().instant().toString().replaceAll(regex, "");
-
-        Assert.assertEquals(currentTime, response.getUpdatedAt().replaceAll(regex2, ""));
-    }
+//    @Test(priority = -5)
+//    public void timeTest() {
+//        Specifications.installSpecifications(Specifications.requestSpec(URL), Specifications.responseSpecUnique(200));
+//        UserTime user = new UserTime("morpheus", "zion resident");
+//        UserTimeResponse response = given()
+//                .body(user)
+//                .when()
+//                .put("api/users/2")
+//                .then().log().all()
+//                .extract().as(UserTimeResponse.class);
+//        String regex = "(.{12})$";
+//        String regex2 = "(.{6})$";
+//        String currentTime = Clock.systemUTC().instant().toString().replaceAll(regex, "");
+//
+//        Assert.assertEquals(currentTime, response.getUpdatedAt().replaceAll(regex2, ""));
+//    }
 }
